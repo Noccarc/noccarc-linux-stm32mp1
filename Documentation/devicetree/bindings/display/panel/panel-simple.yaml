@@ -228,7 +228,7 @@ properties:
         # POWERTIP PH800480T013-IDF2 7.0" WVGA TFT LCD panel
       - powertip,ph800480t013-idf02
         # NVD TM2257DA101C-01 10" TFT LCD panel
-      - nvd_tm2257da 
+      - nvd,tm2257da 
         # QiaoDian XianShi Corporation 4"3 TFT LCD panel
       - qiaodian,qd43003c0-40
         # Rocktech Displays Ltd. RK101II01D-CT 10.1" TFT 1280x800
