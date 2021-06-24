@@ -3192,6 +3192,32 @@ static const struct panel_desc powertip_ph800480t013_idf02  = {
 	.connector_type = DRM_MODE_CONNECTOR_DPI,
 };
 
+
+static const struct drm_display_mode nvd_tm2257da_mode = {
+	.clock = 72400,
+	.hdisplay = 1280,
+	.hsync_start = 1280 + 22,
+	.hsync_end = 1280 + 22 + 160,
+	.htotal = 1280 + 22 + 160 + 150,
+	.vdisplay = 800,
+	.vsync_start = 800 + 22,
+	.vsync_end = 800 + 22 + 38,
+	.vtotal = 800 + 22 + 38 + 32,
+	.vrefresh = 60,
+};
+
+static const struct panel_desc nvd_tm2257da = {
+	.modes = &nvd_tm2257da_mode,
+	.num_modes = 1,
+	.bpc = 8,
+	.size = {
+		.width = 252,
+		.height = 165,
+	},
+	.bus_format = MEDIA_BUS_FMT_RGB888_1X18,
+};
+
+
 static const struct drm_display_mode qd43003c0_40_mode = {
 	.clock = 9000,
 	.hdisplay = 480,
