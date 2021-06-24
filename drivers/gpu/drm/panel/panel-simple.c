@@ -4259,6 +4259,9 @@ static const struct of_device_id platform_of_match[] = {
 		.compatible = "powertip,ph800480t013-idf02",
 		.data = &powertip_ph800480t013_idf02,
 	}, {
+		.compatible = "nvd,tm2257da",
+		.data = &nvd_tm2257da,
+	}, {
 		.compatible = "qiaodian,qd43003c0-40",
 		.data = &qd43003c0_40,
 	}, {
