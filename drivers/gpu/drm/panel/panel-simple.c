@@ -3209,12 +3209,14 @@ static const struct drm_display_mode nvd_tm2257da_mode = {
 static const struct panel_desc nvd_tm2257da = {
 	.modes = &nvd_tm2257da_mode,
 	.num_modes = 1,
-	.bpc = 8,
+	.bpc = 6,
 	.size = {
-		.width = 252,
-		.height = 165,
+		.width = 216,
+		.height = 135,
 	},
-	.bus_format = MEDIA_BUS_FMT_RGB888_3X8,
+	.bus_format = MEDIA_BUS_FMT_RGB666_1X18,
+	.bus_flags = DRM_BUS_FLAG_DE_HIGH | DRM_BUS_FLAG_PIXDATA_SAMPLE_NEGEDGE,
+	.connector_type = DRM_MODE_CONNECTOR_DPI,
 };
 
 
