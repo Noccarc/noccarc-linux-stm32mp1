@@ -3203,7 +3203,6 @@ static const struct drm_display_mode nvd_tm2257da_mode = {
 	.vsync_start = 800 + 22,
 	.vsync_end = 800 + 22 + 38,
 	.vtotal = 800 + 22 + 38 + 32,
-	.vrefresh = 60,
 };
 
 static const struct panel_desc nvd_tm2257da = {
