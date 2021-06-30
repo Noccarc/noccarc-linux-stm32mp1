@@ -3194,7 +3194,7 @@ static const struct panel_desc powertip_ph800480t013_idf02  = {
 
 
 static const struct drm_display_mode nvd_tm2257da_mode = {
-	.clock = 72400,
+	.clock = 74250,
 	.hdisplay = 1280,
 	.hsync_start = 1280 + 22,
 	.hsync_end = 1280 + 22 + 160,
