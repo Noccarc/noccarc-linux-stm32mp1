@@ -1425,10 +1425,10 @@ static const struct panel_desc boe_ev121wxmn10 = {
 		.unprepare = 500,
 	},
 	
-	//.bus_format = MEDIA_BUS_FMT_RGB666_1X18,
-	//.connector_type = DRM_MODE_CONNECTOR_DPI,
-	.bus_format = MEDIA_BUS_FMT_RGB666_1X7X3_SPWG,
-	.connector_type = DRM_MODE_CONNECTOR_LVDS,
+	.bus_format = MEDIA_BUS_FMT_RGB666_1X18,
+	.connector_type = DRM_MODE_CONNECTOR_DPI,
+	//.bus_format = MEDIA_BUS_FMT_RGB666_1X7X3_SPWG,
+	//.connector_type = DRM_MODE_CONNECTOR_LVDS,
 };
 
 
