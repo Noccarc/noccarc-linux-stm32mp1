@@ -1413,7 +1413,7 @@ static const struct drm_display_mode boe_ev121wxmn10_modes[] = {
 
 static const struct panel_desc boe_ev121wxmn10 = {
 	.modes = boe_ev121wxmn10_modes,
-	.num_modes = ARRAY_SIZE(boe_ev121wxmn10s_modes),
+	.num_modes = ARRAY_SIZE(boe_ev121wxmn10_modes),
 	.bpc = 6,
 	.size = {
 		.width = 261,
