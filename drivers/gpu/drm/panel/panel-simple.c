@@ -1397,6 +1397,39 @@ static const struct panel_desc boe_nv140fhmn49 = {
 	.connector_type = DRM_MODE_CONNECTOR_eDP,
 };
 
+static const struct drm_display_mode boe_ev121wxmn10_modes[] = {
+	{
+		.clock = 742500,
+		.hdisplay = 1280,
+		.hsync_start = 1280 + 48,
+		.hsync_end = 1280 + 32,
+		.htotal = 1440,
+		.vdisplay = 800,
+		.vsync_start = 800 + 3,
+		.vsync_end = 800 + 3 + 6,
+		.vtotal = 823,
+	},
+};
+
+static const struct panel_desc boe_ev121wxmn10 = {
+	.modes = boe_ev121wxmn10_modes,
+	.num_modes = ARRAY_SIZE(boe_ev121wxmn10s_modes),
+	.bpc = 6,
+	.size = {
+		.width = 261,
+		.height = 163,
+	},
+	.delay = {
+		.prepare = 8,
+		.enable = 0,
+		.unprepare = 500,
+	},
+	.bus_format = MEDIA_BUS_FMT_RGB666_1X18,
+	.connector_type = DRM_MODE_CONNECTOR_DPI,
+};
+
+
+
 static const struct drm_display_mode cdtech_s043wq26h_ct7_mode = {
 	.clock = 9000,
 	.hdisplay = 480,
@@ -4046,6 +4079,9 @@ static const struct of_device_id platform_of_match[] = {
 	}, {
 		.compatible = "cdtech,s043wq26h-ct7",
 		.data = &cdtech_s043wq26h_ct7,
+	}, {
+		.compatible = "boe,ev121wxmn10",
+		.data = &boe_ev121wxmn10,
 	}, {
 		.compatible = "cdtech,s070pws19hp-fc21",
 		.data = &cdtech_s070pws19hp_fc21,
