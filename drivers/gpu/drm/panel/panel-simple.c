@@ -1402,7 +1402,7 @@ static const struct drm_display_mode boe_ev121wxmn10_modes[] = {
 		.clock = 742500,
 		.hdisplay = 1280,
 		.hsync_start = 1280 + 48,
-		.hsync_end = 1280 + 32,
+		.hsync_end = 1280 + 48 + 32,
 		.htotal = 1440,
 		.vdisplay = 800,
 		.vsync_start = 800 + 3,
@@ -1427,6 +1427,7 @@ static const struct panel_desc boe_ev121wxmn10 = {
 	
 	.bus_format = MEDIA_BUS_FMT_RGB666_1X18,
 	.bus_flags = DRM_BUS_FLAG_DE_HIGH,
+	.connector_type = DRM_MODE_CONNECTOR_DPI,
 };
 
 
