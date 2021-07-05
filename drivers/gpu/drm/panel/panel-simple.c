@@ -3196,13 +3196,13 @@ static const struct panel_desc powertip_ph800480t013_idf02  = {
 static const struct drm_display_mode nvd_tm2257da_mode = {
 	.clock = 74250,
 	.hdisplay = 1280,
-	.hsync_start = 1280 + 22,
-	.hsync_end = 1280 + 22 + 160,
-	.htotal = 1280 + 22 + 160 + 150,
+	.hsync_start = 1280 + 48,
+	.hsync_end = 1280 + 48 + 32,
+	.htotal = 1440,
 	.vdisplay = 800,
-	.vsync_start = 800 + 22,
-	.vsync_end = 800 + 22 + 38,
-	.vtotal = 800 + 22 + 38 + 32,
+	.vsync_start = 800 + 3,
+	.vsync_end = 800 + 3 + 6,
+	.vtotal = 823,
 };
 
 static const struct panel_desc nvd_tm2257da = {
@@ -3210,8 +3210,8 @@ static const struct panel_desc nvd_tm2257da = {
 	.num_modes = 1,
 	.bpc = 6,
 	.size = {
-		.width = 216,
-		.height = 135,
+		.width = 261,
+		.height = 163,
 	},
 	.bus_format = MEDIA_BUS_FMT_RGB666_1X18,
 	.bus_flags = DRM_BUS_FLAG_DE_HIGH | DRM_BUS_FLAG_PIXDATA_SAMPLE_NEGEDGE,
