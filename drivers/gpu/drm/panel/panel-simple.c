@@ -3166,6 +3166,30 @@ static const struct panel_desc powertip_ph800480t013_ibc17 = {
         .bus_flags = DRM_BUS_FLAG_DE_HIGH | DRM_BUS_FLAG_PIXDATA_SAMPLE_NEGEDGE,
 };
 
+static const struct drm_display_mode rvd_mode = {
+        .clock = 72400,
+        .hdisplay = 1280,
+        .hsync_start = 1280 + 72,
+        .hsync_end = 1280 + 72 + 20,
+        .htotal = 1280 + 72 + 20 + 88,
+        .vdisplay = 800,
+        .vsync_start = 800 + 15,
+        .vsync_end = 800 + 15 + 10,
+        .vtotal = 800 + 15 + 10 + 23,
+};
+
+static const struct panel_desc rvd = {
+        .modes = &rvd_mode,
+        .num_modes = 1,
+        .bpc = 6,
+        .size = {
+                .width = 216,
+                .height = 135,
+        },
+        .bus_format = MEDIA_BUS_FMT_RGB666_1X18,
+        .bus_flags = DRM_BUS_FLAG_DE_HIGH | DRM_BUS_FLAG_PIXDATA_SAMPLE_NEGEDGE,
+};
+
 static const struct drm_display_mode powertip_ph800480t013_idf02_mode = {
 	.clock = 24750,
 	.hdisplay = 800,
@@ -4259,6 +4283,9 @@ static const struct of_device_id platform_of_match[] = {
 	}, {
 		.compatible = "powertip,ph800480t013-idf02",
 		.data = &powertip_ph800480t013_idf02,
+	}, {
+		.compatible = "rvd,nocca",
+		.data = &rvd,
 	}, {
 		.compatible = "nvd,tm2257da",
 		.data = &nvd_tm2257da,
