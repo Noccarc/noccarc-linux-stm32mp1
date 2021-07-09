@@ -267,6 +267,8 @@ properties:
       - tianma,tm070rvhg71
         # Toshiba 8.9" WXGA (1280x768) TFT LCD panel
       - toshiba,lt089ac29000
+      	# rvd screen
+      - rvd,nocca 
         # TPK U.S.A. LLC Fusion 7" 800 x 480 (WVGA) LCD panel with capacitive touch
       - tpk,f07a-0102
         # TPK U.S.A. LLC Fusion 10.1" 1024 x 600 (WSVGA) LCD panel with capacitive touch
