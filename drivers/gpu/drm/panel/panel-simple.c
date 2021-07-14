@@ -890,6 +890,9 @@ static const struct panel_desc auo_b116xw03 = {
 	.connector_type = DRM_MODE_CONNECTOR_eDP,
 };
 
+
+
+
 static const struct drm_display_mode auo_b133xtn01_mode = {
 	.clock = 69500,
 	.hdisplay = 1366,
@@ -912,31 +915,31 @@ static const struct panel_desc auo_b133xtn01 = {
 	},
 };
 
-static const struct drm_display_mode auo_b133htn01_mode = {
-	.clock = 150660,
-	.hdisplay = 1920,
-	.hsync_start = 1920 + 172,
-	.hsync_end = 1920 + 172 + 80,
-	.htotal = 1920 + 172 + 80 + 60,
-	.vdisplay = 1080,
-	.vsync_start = 1080 + 25,
-	.vsync_end = 1080 + 25 + 10,
-	.vtotal = 1080 + 25 + 10 + 10,
+static const struct drm_display_mode nhd_mode = {
+	.clock = 597000,
+	.hdisplay = 1024,
+	.hsync_start = 1024 + 160,
+	.hsync_end = 1024 + 160 + 70,
+	.htotal = 1344,
+	.vdisplay = 600,
+	.vsync_start = 600 + 12,
+	.vsync_end = 600 + 12 + 10,
+	.vtotal = 635,
 };
 
-static const struct panel_desc auo_b133htn01 = {
-	.modes = &auo_b133htn01_mode,
+static const struct panel_desc nhd = {
+	.modes = &nhd_mode,
 	.num_modes = 1,
 	.bpc = 6,
 	.size = {
-		.width = 293,
-		.height = 165,
+		.width = 222,
+		.height = 125,
 	},
-	.delay = {
-		.prepare = 105,
-		.enable = 20,
-		.unprepare = 50,
-	},
+	.bus_format = MEDIA_BUS_FMT_RGB666_1X18,
+        .bus_flags = DRM_BUS_FLAG_DE_HIGH | DRM_BUS_FLAG_PIXDATA_SAMPLE_NEGEDGE,
+        .connector_type = DRM_MODE_CONNECTOR_DPI,
+
+
 };
 
 static const struct display_timing auo_g070vvn01_timings = {
@@ -4358,7 +4361,10 @@ static const struct of_device_id platform_of_match[] = {
 	}, {
 		.compatible = "vxt,vl050-8048nt-c01",
 		.data = &vl050_8048nt_c01,
-	}, {
+	},{
+                .compatible = "nhd,nocca",
+                .data = &nhd,
+        }, {
 		.compatible = "winstar,wf35ltiacd",
 		.data = &winstar_wf35ltiacd,
 	}, {
