@@ -3187,7 +3187,7 @@ static const struct panel_desc rvd = {
                 .height = 135,
         },
         .bus_format = MEDIA_BUS_FMT_RGB666_1X18,
-        .bus_flags =  DRM_BUS_FLAG_PIXDATA_SAMPLE_NEGEDGE,
+        .bus_flags =  DRM_BUS_FLAG_DE_LOW | DRM_BUS_FLAG_PIXDATA_SAMPLE_NEGEDGE,
 };
 
 static const struct drm_display_mode powertip_ph800480t013_idf02_mode = {
