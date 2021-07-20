@@ -284,8 +284,10 @@ properties:
       - vxt,vl050-8048nt-c01
         # Winstar Display Corporation 3.5" QVGA (320x240) TFT LCD panel
       - winstar,wf35ltiacd
-      #Custom Noccarc Display
+        #Custom Noccarc Display
       - custom,noccarc
+        #Innolux Noccarc Display
+      - innolux,noccarc
 
   backlight: true
   enable-gpios: true

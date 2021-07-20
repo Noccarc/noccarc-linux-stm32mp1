@@ -1500,6 +1500,30 @@ static const struct panel_desc custom_noccarc = {
 	.connector_type = DRM_MODE_CONNECTOR_DPI,
 };
 
+static const struct drm_display_mode innolux_noccarc_mode = {
+        .clock = 66000,
+        .hdisplay = 1024,
+        .hsync_start = 1024 + 100,
+        .hsync_end = 1024 + 100 + 50,
+        .htotal = 1024 + 100 + 220,
+        .vdisplay = 768,
+        .vsync_start = 768 + 20,
+        .vsync_end = 768 + 20 + 8,
+        .vtotal = 768 + 20 + 18,
+};
+
+static const struct panel_desc innolux_noccarc = {
+        .modes = &innolux_noccarc_mode,
+        .num_modes = 1,
+        .bpc = 6,
+        .size = {
+                .width = 261,
+                .height = 163,
+        },
+        .bus_format = MEDIA_BUS_FMT_RGB666_1X18,
+        .bus_flags = DRM_BUS_FLAG_PIXDATA_SAMPLE_NEGEDGE,
+        .connector_type = DRM_MODE_CONNECTOR_DPI,
+};
 
 
 static const struct drm_display_mode cdtech_s070wv95_ct16_mode = {
@@ -4379,7 +4403,10 @@ static const struct of_device_id platform_of_match[] = {
 	}, {
 		.compatible = "custom,noccarc",
 		.data = &custom_noccarc,
-	}, {
+	},{
+                .compatible = "innolux,noccarc",
+                .data = &innolux_noccarc,
+        }, {
 		.compatible = "urt,umsh-8596md-19t",
 		.data = &urt_umsh_8596md_lvds,
 	}, {
