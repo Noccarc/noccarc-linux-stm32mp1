@@ -2267,7 +2267,7 @@ static const struct panel_desc innolux_g121x1_l03 = {
  *
  * ...but doesn't go into exactly how that should be split into a front
  * porch, back porch, or sync length.  For now we'll leave a single setting
- * here which allows a bit of tweaking of the pixel clock at the expense of
+ * here which allows a biwt of tweaking of the pixel clock at the expense of
  * refresh rate.
  */
 static const struct display_timing innolux_n116bge_timing = {
