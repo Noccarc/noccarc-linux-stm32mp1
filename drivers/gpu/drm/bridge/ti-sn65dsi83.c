@@ -648,10 +648,12 @@ static int sn65dsi83_probe(struct i2c_client *client,
 	struct sn65dsi83 *ctx;
 	int ret;
 
+    printk(KERN_INFO "SN65DSI83: Registering device ...\n");
 	ctx = devm_kzalloc(dev, sizeof(*ctx), GFP_KERNEL);
 	if (!ctx)
 		return -ENOMEM;
 
+    printk(KERN_INFO "SN65DSI83: Registration Successfull ...\n");
 	ctx->dev = dev;
 
 	if (dev->of_node) {
@@ -661,24 +663,32 @@ static int sn65dsi83_probe(struct i2c_client *client,
 		model = id->driver_data;
 	}
 
+     printk(KERN_INFO "SN65DSI83: Putting chip to reset...\n");
 	/* Put the chip in reset, pull EN line low, and assure 10ms reset low timing. */
 	ctx->enable_gpio = devm_gpiod_get(ctx->dev, "enable", GPIOD_OUT_LOW);
 	if (IS_ERR(ctx->enable_gpio))
 		return PTR_ERR(ctx->enable_gpio);
 
+    printk(KERN_INFO "SN65DSI83:Reset Successful ...\n");
 	usleep_range(10000, 11000);
 
 	ret = sn65dsi83_parse_dt(ctx, model);
 	if (ret)
 		return ret;
+		
+	printk(KERN_INFO "SN65DSI83:Parsing Device Tree Successful ...\n");	
 
 	ctx->regmap = devm_regmap_init_i2c(client, &sn65dsi83_regmap_config);
 	if (IS_ERR(ctx->regmap))
 		return PTR_ERR(ctx->regmap);
+		
+	printk(KERN_INFO "SN65DSI83: Got Pointer to Device ...\n");		
 
 	dev_set_drvdata(dev, ctx);
 	i2c_set_clientdata(client, ctx);
 
+    printk(KERN_INFO "SN65DSI83: Setting Client Data Successful ...\n");		    
+    
 	ctx->bridge.funcs = &sn65dsi83_funcs;
 	ctx->bridge.of_node = dev->of_node;
 	drm_bridge_add(&ctx->bridge);
@@ -687,9 +697,12 @@ static int sn65dsi83_probe(struct i2c_client *client,
 	if (ret)
 		goto err_remove_bridge;
 
+    printk(KERN_INFO "SN65DSI83: Host attach Successful ...\n");		    
 	return 0;
 
 err_remove_bridge:
+
+    printk(KERN_INFO "SN65DSI83: Host attach failed ...\n");		    
 	drm_bridge_remove(&ctx->bridge);
 	return ret;
 }
