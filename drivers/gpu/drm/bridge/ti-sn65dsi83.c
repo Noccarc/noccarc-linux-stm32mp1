@@ -323,6 +323,8 @@ static u8 sn65dsi83_get_dsi_div(struct sn65dsi83 *ctx)
 static void sn65dsi83_atomic_enable(struct drm_bridge *bridge,
 				    struct drm_bridge_state *old_bridge_state)
 {
+
+    pr_info( "SN65DSI83: In Atomic enable....\n");
 	struct sn65dsi83 *ctx = bridge_to_sn65dsi83(bridge);
 	struct drm_atomic_state *state = old_bridge_state->base.state;
 	const struct drm_bridge_state *bridge_state;
@@ -485,8 +487,8 @@ static void sn65dsi83_atomic_enable(struct drm_bridge *bridge,
 static void sn65dsi83_atomic_disable(struct drm_bridge *bridge,
 				     struct drm_bridge_state *old_bridge_state)
 {
+    pr_info( "SN65DSI83: In Atomic disable ...\n");
 	struct sn65dsi83 *ctx = bridge_to_sn65dsi83(bridge);
-
 	/* Put the chip in reset, pull EN line low, and assure 10ms reset low timing. */
 	gpiod_set_value(ctx->enable_gpio, 0);
 	usleep_range(10000, 11000);
@@ -549,6 +551,8 @@ static const struct drm_bridge_funcs sn65dsi83_funcs = {
 
 static int sn65dsi83_parse_dt(struct sn65dsi83 *ctx, enum sn65dsi83_model model)
 {
+
+    pr_info( "SN65DSI83: In Parse DT ...\n");
 	struct drm_bridge *panel_bridge;
 	struct device *dev = ctx->dev;
 	struct device_node *endpoint;
@@ -604,6 +608,8 @@ static int sn65dsi83_parse_dt(struct sn65dsi83 *ctx, enum sn65dsi83_model model)
 
 static int sn65dsi83_host_attach(struct sn65dsi83 *ctx)
 {
+
+    pr_info( "SN65DSI83: In Host attach ...\n");
 	struct device *dev = ctx->dev;
 	struct mipi_dsi_device *dsi;
 	struct mipi_dsi_host *host;
@@ -620,6 +626,7 @@ static int sn65dsi83_host_attach(struct sn65dsi83 *ctx)
 		return -EPROBE_DEFER;
 	}
 
+    pr_info( "SN65DSI83: Found device dsi node ...\n");
 	dsi = devm_mipi_dsi_device_register_full(dev, host, &info);
 	if (IS_ERR(dsi))
 		return dev_err_probe(dev, PTR_ERR(dsi),
@@ -648,12 +655,12 @@ static int sn65dsi83_probe(struct i2c_client *client,
 	struct sn65dsi83 *ctx;
 	int ret;
 
-    printk(KERN_INFO "SN65DSI83: Registering device ...\n");
+    pr_info( "SN65DSI83: Registering device ...\n");
 	ctx = devm_kzalloc(dev, sizeof(*ctx), GFP_KERNEL);
 	if (!ctx)
 		return -ENOMEM;
 
-    printk(KERN_INFO "SN65DSI83: Registration Successfull ...\n");
+    pr_info( "SN65DSI83: Registration Successful ...\n");
 	ctx->dev = dev;
 
 	if (dev->of_node) {
@@ -663,31 +670,31 @@ static int sn65dsi83_probe(struct i2c_client *client,
 		model = id->driver_data;
 	}
 
-     printk(KERN_INFO "SN65DSI83: Putting chip to reset...\n");
+     pr_info( "SN65DSI83: Putting chip to reset...\n");
 	/* Put the chip in reset, pull EN line low, and assure 10ms reset low timing. */
 	ctx->enable_gpio = devm_gpiod_get(ctx->dev, "enable", GPIOD_OUT_LOW);
 	if (IS_ERR(ctx->enable_gpio))
 		return PTR_ERR(ctx->enable_gpio);
 
-    printk(KERN_INFO "SN65DSI83:Reset Successful ...\n");
+    pr_info( "SN65DSI83:Reset Successful ...\n");
 	usleep_range(10000, 11000);
 
 	ret = sn65dsi83_parse_dt(ctx, model);
 	if (ret)
 		return ret;
 		
-	printk(KERN_INFO "SN65DSI83:Parsing Device Tree Successful ...\n");	
+	pr_info( "SN65DSI83:Parsing Device Tree Successful ...\n");	
 
 	ctx->regmap = devm_regmap_init_i2c(client, &sn65dsi83_regmap_config);
 	if (IS_ERR(ctx->regmap))
 		return PTR_ERR(ctx->regmap);
 		
-	printk(KERN_INFO "SN65DSI83: Got Pointer to Device ...\n");		
+	pr_info( "SN65DSI83: Got Pointer to Device ...\n");		
 
 	dev_set_drvdata(dev, ctx);
 	i2c_set_clientdata(client, ctx);
 
-    printk(KERN_INFO "SN65DSI83: Setting Client Data Successful ...\n");		    
+    pr_info( "SN65DSI83: Setting Client Data Successful ...\n");		    
     
 	ctx->bridge.funcs = &sn65dsi83_funcs;
 	ctx->bridge.of_node = dev->of_node;
@@ -697,12 +704,12 @@ static int sn65dsi83_probe(struct i2c_client *client,
 	if (ret)
 		goto err_remove_bridge;
 
-    printk(KERN_INFO "SN65DSI83: Host attach Successful ...\n");		    
+    pr_info( "SN65DSI83: Host attach Successful ...\n");		    
 	return 0;
 
 err_remove_bridge:
 
-    printk(KERN_INFO "SN65DSI83: Host attach failed ...\n");		    
+    pr_info( "SN65DSI83: Host attach failed ...\n");		    
 	drm_bridge_remove(&ctx->bridge);
 	return ret;
 }
