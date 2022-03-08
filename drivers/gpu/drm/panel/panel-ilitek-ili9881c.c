@@ -798,15 +798,15 @@ static const struct drm_display_mode k101_im2byl02_default_mode = {
 static const struct drm_display_mode ph720128t003_zbc02_default_mode = {
         .clock          = 66000,
 
-        .hdisplay       = 768,
-        .hsync_start    = 768 + 20,
-        .hsync_end      = 768 + 20 + 8,
-        .htotal         = 806,
+        .hdisplay       = 1024,
+        .hsync_start    = 1024,
+        .hsync_end      = 1024 + 20,
+        .htotal         = 1344,
 
-        .vdisplay       = 1024,
-        .vsync_start    = 1024 + 20,
-        .vsync_end      = 1024 + 20 + 50,
-        .vtotal         = 1344,
+        .vdisplay       = 768,
+        .vsync_start    = 768,
+        .vsync_end      = 768 + 10,
+        .vtotal         = 806,
 
         .width_mm       = 307,
         .height_mm      = 231,
