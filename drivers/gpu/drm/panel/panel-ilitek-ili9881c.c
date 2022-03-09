@@ -881,7 +881,7 @@ static int ili9881c_dsi_probe(struct mipi_dsi_device *dsi)
 	backlight_disable(ctx->panel.backlight);
 
 	drm_panel_add(&ctx->panel);
-	dsi->mode_flags = MIPI_DSI_MODE_VIDEO_SYNC_PULSE;
+	dsi->mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST;
 	dsi->format = MIPI_DSI_FMT_RGB888;
 	dsi->lanes = 2;
 
