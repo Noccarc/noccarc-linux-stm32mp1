@@ -801,12 +801,12 @@ static const struct drm_display_mode ph720128t003_zbc02_default_mode = {
         .hdisplay       = 1024,
         .hsync_start    = 1024 + 1,
         .hsync_end      = 1024 + 1 + 1,
-        .htotal         = 1344,
+        .htotal         = 1280,
 
         .vdisplay       = 768,
-        .vsync_start    = 768 + 38,
-        .vsync_end      = 768 + 38 + 1,
-        .vtotal         = 806,
+        .vsync_start    = 768 + 20,
+        .vsync_end      = 768 + 20 + 1,
+        .vtotal         = 799,
 
         .width_mm       = 307,
         .height_mm      = 231,
