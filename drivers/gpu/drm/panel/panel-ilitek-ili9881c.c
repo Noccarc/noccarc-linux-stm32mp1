@@ -721,9 +721,9 @@ static int ili9881c_prepare(struct drm_panel *panel)
 	if (ret)
 		return ret;
 
-	ret = mipi_dsi_dcs_set_tear_on(ctx->dsi, MIPI_DSI_DCS_TEAR_MODE_VBLANK);
+	/*ret = mipi_dsi_dcs_set_tear_on(ctx->dsi, MIPI_DSI_DCS_TEAR_MODE_VBLANK);
 	if (ret)
-		return ret;
+		return ret;*/
 
 	ret = mipi_dsi_dcs_exit_sleep_mode(ctx->dsi);
 	if (ret)
@@ -810,6 +810,8 @@ static const struct drm_display_mode ph720128t003_zbc02_default_mode = {
 
         .width_mm       = 307,
         .height_mm      = 231,
+        .bus_flags	= DRM_BUS_FLAG_DE_HIGH | DRM_BUS_FLAG_PIXDATA_NEGEDGE,
+	.flags		= DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
 };
 
 
@@ -881,7 +883,7 @@ static int ili9881c_dsi_probe(struct mipi_dsi_device *dsi)
 	backlight_disable(ctx->panel.backlight);
 
 	drm_panel_add(&ctx->panel);
-	dsi->mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST;
+	dsi->mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_SYNC_PULSE;
 	dsi->format = MIPI_DSI_FMT_RGB888;
 	dsi->lanes = 2;
 
