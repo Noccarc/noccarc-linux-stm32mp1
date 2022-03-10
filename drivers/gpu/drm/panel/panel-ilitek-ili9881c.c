@@ -810,7 +810,6 @@ static const struct drm_display_mode ph720128t003_zbc02_default_mode = {
 
         .width_mm       = 307,
         .height_mm      = 231,
-        .bus_flags	= DRM_BUS_FLAG_DE_HIGH | DRM_BUS_FLAG_PIXDATA_NEGEDGE,
 	.flags		= DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
 };
 
