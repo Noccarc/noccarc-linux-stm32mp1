@@ -666,9 +666,9 @@ static int ili9881c_switch_page(struct ili9881c *ctx, u8 page)
 	u8 buf[4] = { 0xff, 0x98, 0x81, page };
 	int ret;
 
-	ret = mipi_dsi_dcs_write_buffer(ctx->dsi, buf, sizeof(buf));
+	/*ret = mipi_dsi_dcs_write_buffer(ctx->dsi, buf, sizeof(buf));
 	if (ret < 0)
-		return ret;
+		return ret;*/
 
 	return 0;
 }
@@ -678,9 +678,9 @@ static int ili9881c_send_cmd_data(struct ili9881c *ctx, u8 cmd, u8 data)
 	u8 buf[2] = { cmd, data };
 	int ret;
 
-	ret = mipi_dsi_dcs_write_buffer(ctx->dsi, buf, sizeof(buf));
+	/*ret = mipi_dsi_dcs_write_buffer(ctx->dsi, buf, sizeof(buf));
 	if (ret < 0)
-		return ret;
+		return ret;*/
 
 	return 0;
 }
