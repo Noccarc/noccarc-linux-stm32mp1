@@ -4695,7 +4695,7 @@ static const struct panel_desc_dsi noccarc_dsi_c = {
 		},
 		.connector_type = DRM_MODE_CONNECTOR_DSI,
 	},
-	.flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_SYNC_EVENT,
+	.flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_EOT_PACKET,
 	.format = MIPI_DSI_FMT_RGB888,
 	.lanes = 2,
 };
