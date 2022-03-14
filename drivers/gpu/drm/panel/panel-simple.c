@@ -4614,15 +4614,15 @@ static const struct panel_desc_dsi osd101t2045_53ts = {
 
 
 static const struct drm_display_mode noccarc_dsi_a_mode = {
-	.clock = 66000,
+	.clock = 65000,
 	.hdisplay = 1024,
-	.hsync_start = 1024 + 1,
-	.hsync_end = 1024 + 1 + 1,
-	.htotal = 1920 + 112 + 16 + 32,
-	.vdisplay = 1200,
-	.vsync_start = 1200 + 16,
-	.vsync_end = 1200 + 16 + 2,
-	.vtotal = 1200 + 16 + 2 + 16,
+	.hsync_start = 1024 + 0,
+	.hsync_end = 1024 + 1,
+	.htotal = 1024 + 0 + 1 + 320,
+	.vdisplay = 768,
+	.vsync_start = 768 + 38,
+	.vsync_end = 768 + 38 + 1,
+	.vtotal = 768 + 38 + 1 + 0,
 	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
 };
 
@@ -4643,15 +4643,15 @@ static const struct panel_desc_dsi noccarc_dsi_a = {
 };
 
 static const struct drm_display_mode noccarc_dsi_b_mode = {
-	.clock = 66000,
+	.clock = 65000,
 	.hdisplay = 1024,
-	.hsync_start = 1024 + 1,
-	.hsync_end = 1024 + 1 + 1,
-	.htotal = 1920 + 112 + 16 + 32,
-	.vdisplay = 1200,
-	.vsync_start = 1200 + 16,
-	.vsync_end = 1200 + 16 + 2,
-	.vtotal = 1200 + 16 + 2 + 16,
+	.hsync_start = 1024 + 0,
+	.hsync_end = 1024 + 1,
+	.htotal = 1024 + 0 + 1 + 320,
+	.vdisplay = 768,
+	.vsync_start = 768 + 38,
+	.vsync_end = 768 + 38 + 1,
+	.vtotal = 768 + 38 + 1 + 0,
 	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
 };
 
@@ -4672,15 +4672,15 @@ static const struct panel_desc_dsi noccarc_dsi_b = {
 };
 
 static const struct drm_display_mode noccarc_dsi_c_mode = {
-	.clock = 66000,
+	.clock = 65000,
 	.hdisplay = 1024,
-	.hsync_start = 1024 + 1,
-	.hsync_end = 1024 + 1 + 1,
-	.htotal = 1920 + 112 + 16 + 32,
-	.vdisplay = 1200,
-	.vsync_start = 1200 + 16,
-	.vsync_end = 1200 + 16 + 2,
-	.vtotal = 1200 + 16 + 2 + 16,
+	.hsync_start = 1024 + 0,
+	.hsync_end = 1024 + 1,
+	.htotal = 1024 + 0 + 1 + 320,
+	.vdisplay = 768,
+	.vsync_start = 768 + 38,
+	.vsync_end = 768 + 38 + 1,
+	.vtotal = 768 + 38 + 1 + 0,
 	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
 };
 
@@ -4701,15 +4701,15 @@ static const struct panel_desc_dsi noccarc_dsi_c = {
 };
 
 static const struct drm_display_mode noccarc_dsi_d_mode = {
-	.clock = 66000,
+	.clock = 65000,
 	.hdisplay = 1024,
-	.hsync_start = 1024 + 1,
-	.hsync_end = 1024 + 1 + 1,
-	.htotal = 1920 + 112 + 16 + 32,
-	.vdisplay = 1200,
-	.vsync_start = 1200 + 16,
-	.vsync_end = 1200 + 16 + 2,
-	.vtotal = 1200 + 16 + 2 + 16,
+	.hsync_start = 1024 + 0,
+	.hsync_end = 1024 + 1,
+	.htotal = 1024 + 0 + 1 + 320,
+	.vdisplay = 768,
+	.vsync_start = 768 + 38,
+	.vsync_end = 768 + 38 + 1,
+	.vtotal = 768 + 38 + 1 + 0,
 	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
 };
 
@@ -4730,15 +4730,15 @@ static const struct panel_desc_dsi noccarc_dsi_d = {
 };
 
 static const struct drm_display_mode noccarc_dsi_e_mode = {
-	.clock = 66000,
+	.clock = 65000,
 	.hdisplay = 1024,
-	.hsync_start = 1024 + 1,
-	.hsync_end = 1024 + 1 + 1,
-	.htotal = 1920 + 112 + 16 + 32,
-	.vdisplay = 1200,
-	.vsync_start = 1200 + 16,
-	.vsync_end = 1200 + 16 + 2,
-	.vtotal = 1200 + 16 + 2 + 16,
+	.hsync_start = 1024 + 0,
+	.hsync_end = 1024 + 1,
+	.htotal = 1024 + 0 + 1 + 320,
+	.vdisplay = 768,
+	.vsync_start = 768 + 38,
+	.vsync_end = 768 + 38 + 1,
+	.vtotal = 768 + 38 + 1 + 0,
 	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
 };
 
@@ -4760,15 +4760,15 @@ static const struct panel_desc_dsi noccarc_dsi_e = {
 
 
 static const struct drm_display_mode noccarc_dsi_f_mode = {
-	.clock = 66000,
+	.clock = 65000,
 	.hdisplay = 1024,
-	.hsync_start = 1024 + 1,
-	.hsync_end = 1024 + 1 + 1,
-	.htotal = 1920 + 112 + 16 + 32,
-	.vdisplay = 1200,
-	.vsync_start = 1200 + 16,
-	.vsync_end = 1200 + 16 + 2,
-	.vtotal = 1200 + 16 + 2 + 16,
+	.hsync_start = 1024 + 0,
+	.hsync_end = 1024 + 1,
+	.htotal = 1024 + 0 + 1 + 320,
+	.vdisplay = 768,
+	.vsync_start = 768 + 38,
+	.vsync_end = 768 + 38 + 1,
+	.vtotal = 768 + 38 + 1 + 0,
 	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
 };
 
