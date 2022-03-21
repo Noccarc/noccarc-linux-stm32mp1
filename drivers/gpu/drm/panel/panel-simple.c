@@ -4645,13 +4645,13 @@ static const struct panel_desc_dsi noccarc_dsi_a = {
 static const struct drm_display_mode noccarc_dsi_b_mode = {
 	.clock = 65000,
 	.hdisplay = 1024,
-	.hsync_start = 1024 + 0,
-	.hsync_end = 1024 + 1,
-	.htotal = 1024 + 0 + 1 + 320,
+	.hsync_start = 1024 + 155,
+	.hsync_end = 1024 + 155 + 10,
+	.htotal = 1024 + 155 + 10 + 155,
 	.vdisplay = 768,
-	.vsync_start = 768 + 38,
-	.vsync_end = 768 + 38 + 1,
-	.vtotal = 768 + 38 + 1 + 0,
+	.vsync_start = 768 + 16,
+	.vsync_end = 768 + 16 + 6,
+	.vtotal = 768 + 16 + 6 + 16,
 	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
 };
 
@@ -4666,7 +4666,7 @@ static const struct panel_desc_dsi noccarc_dsi_b = {
 		},
 		.connector_type = DRM_MODE_CONNECTOR_DSI,
 	},
-	.flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_SYNC_PULSE,
+	.flags = MIPI_DSI_MODE_VIDEO,
 	.format = MIPI_DSI_FMT_RGB888,
 	.lanes = 2,
 };
