@@ -665,7 +665,7 @@ static void panel_simple_shutdown(struct device *dev)
 
 
 static const struct drm_display_mode tianma_nlb150xg01l_01_mode = {
-        .clock = 65000,
+        .clock = 66000,
         .hdisplay = 1024,
         .hsync_start = 1024 + 155,
         .hsync_end = 1024 + 155 + 10,
