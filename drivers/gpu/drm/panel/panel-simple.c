@@ -663,6 +663,35 @@ static void panel_simple_shutdown(struct device *dev)
 	drm_panel_unprepare(&panel->base);
 }
 
+
+static const struct drm_display_mode tianma_nlb150xg01l_01_mode = {
+        .clock = 65000,
+        .hdisplay = 1024,
+        .hsync_start = 1024 + 155,
+        .hsync_end = 1024 + 155 + 10,
+        .htotal = 1024 + 155 + 10 + 155,
+        .vdisplay = 768,
+        .vsync_start = 768 + 16,
+        .vsync_end = 768 + 16 + 6,
+        .vtotal = 768 + 16 + 6 + 16,
+        .flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
+};
+
+static const struct panel_desc tianma_nlb150xg01l_01 = {
+
+        .modes = &tianma_nlb150xg01l_01_mode,
+        .num_modes = 1,
+        .bpc = 8,
+        .size = {
+                .width = 304,
+                .height = 228,
+        },
+        .bus_flags = DRM_BUS_FLAG_DE_HIGH,
+        .bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_SPWG,
+        .connector_type = DRM_MODE_CONNECTOR_LVDS,
+};
+
+
 static const struct drm_display_mode ampire_am_1280800n3tzqw_t00h_mode = {
 	.clock = 71100,
 	.hdisplay = 1280,
@@ -4314,6 +4343,9 @@ static const struct of_device_id platform_of_match[] = {
 		.compatible = "tfc,s9700rtwv43tr-01b",
 		.data = &tfc_s9700rtwv43tr_01b,
 	}, {
+		.compatible = "tianma,nlb150xg01l-01",
+		.data = &tianma_nlb150xg01l_01,
+	}, {
 		.compatible = "tianma,tm070jdhg30",
 		.data = &tianma_tm070jdhg30,
 	}, {
@@ -4612,6 +4644,154 @@ static const struct panel_desc_dsi osd101t2045_53ts = {
 	.lanes = 4,
 };
 
+
+static const struct drm_display_mode noccarc_dsi_b_mode = {
+	.clock = 65000,
+	.hdisplay = 1024,
+	.hsync_start = 1024 + 155,
+	.hsync_end = 1024 + 155 + 10,
+	.htotal = 1024 + 155 + 10 + 155,
+	.vdisplay = 768,
+	.vsync_start = 768 + 16,
+	.vsync_end = 768 + 16 + 6,
+	.vtotal = 768 + 16 + 6 + 16,
+	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
+};
+
+static const struct panel_desc_dsi noccarc_dsi_b = {
+	.desc = {
+		.modes = &noccarc_dsi_b_mode,
+		.num_modes = 1,
+		.bpc = 8,
+		.size = {
+			.width = 304,
+			.height = 228,
+		},
+		.connector_type = DRM_MODE_CONNECTOR_DSI,
+	},
+	.flags = MIPI_DSI_MODE_VIDEO,
+	.format = MIPI_DSI_FMT_RGB888,
+	.lanes = 2,
+};
+
+static const struct drm_display_mode noccarc_dsi_c_mode = {
+	.clock = 65000,
+	.hdisplay = 1024,
+	.hsync_start = 1024 + 0,
+	.hsync_end = 1024 + 1,
+	.htotal = 1024 + 0 + 1 + 320,
+	.vdisplay = 768,
+	.vsync_start = 768 + 38,
+	.vsync_end = 768 + 38 + 1,
+	.vtotal = 768 + 38 + 1 + 0,
+	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
+};
+
+static const struct panel_desc_dsi noccarc_dsi_c = {
+	.desc = {
+		.modes = &noccarc_dsi_c_mode,
+		.num_modes = 1,
+		.bpc = 8,
+		.size = {
+			.width = 304,
+			.height = 228,
+		},
+		.connector_type = DRM_MODE_CONNECTOR_DSI,
+	},
+	.flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_EOT_PACKET,
+	.format = MIPI_DSI_FMT_RGB888,
+	.lanes = 2,
+};
+
+static const struct drm_display_mode noccarc_dsi_d_mode = {
+	.clock = 65000,
+	.hdisplay = 1024,
+	.hsync_start = 1024 + 0,
+	.hsync_end = 1024 + 1,
+	.htotal = 1024 + 0 + 1 + 320,
+	.vdisplay = 768,
+	.vsync_start = 768 + 38,
+	.vsync_end = 768 + 38 + 1,
+	.vtotal = 768 + 38 + 1 + 0,
+	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
+};
+
+static const struct panel_desc_dsi noccarc_dsi_d = {
+	.desc = {
+		.modes = &noccarc_dsi_d_mode,
+		.num_modes = 1,
+		.bpc = 8,
+		.size = {
+			.width = 304,
+			.height = 228,
+		},
+		.connector_type = DRM_MODE_CONNECTOR_DSI,
+	},
+	.flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_SYNC_PULSE | MIPI_DSI_MODE_EOT_PACKET,
+	.format = MIPI_DSI_FMT_RGB888,
+	.lanes = 2,
+};
+
+static const struct drm_display_mode noccarc_dsi_e_mode = {
+	.clock = 65000,
+	.hdisplay = 1024,
+	.hsync_start = 1024 + 0,
+	.hsync_end = 1024 + 1,
+	.htotal = 1024 + 0 + 1 + 320,
+	.vdisplay = 768,
+	.vsync_start = 768 + 38,
+	.vsync_end = 768 + 38 + 1,
+	.vtotal = 768 + 38 + 1 + 0,
+	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
+};
+
+static const struct panel_desc_dsi noccarc_dsi_e = {
+	.desc = {
+		.modes = &noccarc_dsi_e_mode,
+		.num_modes = 1,
+		.bpc = 8,
+		.size = {
+			.width = 304,
+			.height = 228,
+		},
+		.connector_type = DRM_MODE_CONNECTOR_DSI,
+	},
+	.flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST,
+	.format = MIPI_DSI_FMT_RGB888,
+	.lanes = 2,
+};
+
+
+static const struct drm_display_mode noccarc_dsi_f_mode = {
+	.clock = 65000,
+	.hdisplay = 1024,
+	.hsync_start = 1024 + 0,
+	.hsync_end = 1024 + 1,
+	.htotal = 1024 + 0 + 1 + 320,
+	.vdisplay = 768,
+	.vsync_start = 768 + 38,
+	.vsync_end = 768 + 38 + 1,
+	.vtotal = 768 + 38 + 1 + 0,
+	.flags = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
+};
+
+static const struct panel_desc_dsi noccarc_dsi_f = {
+	.desc = {
+		.modes = &noccarc_dsi_f_mode,
+		.num_modes = 1,
+		.bpc = 8,
+		.size = {
+			.width = 304,
+			.height = 228,
+		},
+		.connector_type = DRM_MODE_CONNECTOR_DSI,
+	},
+	.flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST | MIPI_DSI_MODE_EOT_PACKET,
+	.format = MIPI_DSI_FMT_RGB888,
+	.lanes = 2,
+};
+
+
 static const struct of_device_id dsi_of_match[] = {
 	{
 		.compatible = "auo,b080uan01",
@@ -4635,6 +4815,21 @@ static const struct of_device_id dsi_of_match[] = {
 		.compatible = "osddisplays,osd101t2045-53ts",
 		.data = &osd101t2045_53ts
 	}, {
+		.compatible = "noccarc,noccarc_dsi_b",
+		.data = &noccarc_dsi_b
+	},{
+		.compatible = "noccarc,noccarc_dsi_c",
+		.data = &noccarc_dsi_c
+	},{
+		.compatible = "noccarc,noccarc_dsi_d",
+		.data = &noccarc_dsi_d
+	},{
+		.compatible = "noccarc,noccarc_dsi_e",
+		.data = &noccarc_dsi_e
+	},{
+		.compatible = "noccarc,noccarc_dsi_f",
+		.data = &noccarc_dsi_f
+	},{
 		/* sentinel */
 	}
 };
