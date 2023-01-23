@@ -264,7 +264,8 @@ static int panel_simple_unprepare(struct drm_panel *panel)
 	return 0;
 }
 
-static int panel_simple_get_hpd_gpio(struct device *dev,
+static int panel_simple_get_hpd_gpio(struct device *dev,nhd
+
 				     struct panel_simple *p, bool from_probe)
 {
 	int err;
@@ -2939,12 +2940,12 @@ static const struct drm_display_mode newhaven_nhd_10_1024600af_lsxv_ctp_mode = {
 	.clock = 60000,
 	.hdisplay = 1024,
 	.hsync_start = 1024 + 160,
-	.hsync_end = 1024 + 160 + 0,
-	.htotal = 1024 + 160 + 0 + 160,
+	.hsync_end = 1024 + 160 + 8,
+	.htotal = 1024 + 160 + 8 + 160,
 	.vdisplay = 600,
 	.vsync_start = 600 + 12,
-	.vsync_end = 600 + 12 + 0,
-	.vtotal = 600 + 12 + 0 + 23,
+	.vsync_end = 600 + 12 + 5,
+	.vtotal = 600 + 12 + 5 + 23,
 	.flags = DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
 };
 
