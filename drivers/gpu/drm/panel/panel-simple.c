@@ -2936,7 +2936,7 @@ static const struct panel_desc newhaven_nhd_43_480272ef_atxl = {
 };
 
 static const struct drm_display_mode newhaven_nhd_10_1024600af_lsxv_ctp_mode = {
-	.clock = 51200,
+	.clock = 60000,
 	.hdisplay = 1024,
 	.hsync_start = 1024 + 160,
 	.hsync_end = 1024 + 160 + 56,
