@@ -264,8 +264,7 @@ static int panel_simple_unprepare(struct drm_panel *panel)
 	return 0;
 }
 
-static int panel_simple_get_hpd_gpio(struct device *dev,nhd
-
+static int panel_simple_get_hpd_gpio(struct device *dev,
 				     struct panel_simple *p, bool from_probe)
 {
 	int err;
