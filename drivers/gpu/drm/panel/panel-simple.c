@@ -2939,12 +2939,12 @@ static const struct drm_display_mode newhaven_nhd_10_1024600af_lsxv_ctp_mode = {
 	.clock = 60000,
 	.hdisplay = 1024,
 	.hsync_start = 1024 + 160,
-	.hsync_end = 1024 + 160 + 56,
-	.htotal = 1024 + 160 + 56 + 160,
+	.hsync_end = 1024 + 160 + 0,
+	.htotal = 1024 + 160 + 0 + 160,
 	.vdisplay = 600,
 	.vsync_start = 600 + 12,
-	.vsync_end = 600 + 12 + 115,
-	.vtotal = 600 + 12 + 115 + 23,
+	.vsync_end = 600 + 12 + 0,
+	.vtotal = 600 + 12 + 0 + 23,
 	.flags = DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
 };
 
