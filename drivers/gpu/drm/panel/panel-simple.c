@@ -2935,6 +2935,32 @@ static const struct panel_desc newhaven_nhd_43_480272ef_atxl = {
 	.connector_type = DRM_MODE_CONNECTOR_DPI,
 };
 
+static const struct drm_display_mode newhaven_nhd_10_1024600af_lsxv_ctp_mode = {
+	.clock = 51200,
+	.hdisplay = 1024,
+	.hsync_start = 1024 + 160,
+	.hsync_end = 1024 + 160 + 56,
+	.htotal = 1024 + 160 + 56 + 160,
+	.vdisplay = 600,
+	.vsync_start = 600 + 12,
+	.vsync_end = 600 + 12 + 115,
+	.vtotal = 600 + 12 + 115 + 23,
+	.flags = DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
+};
+
+static const struct panel_desc newhaven_nhd_10_1024600af_lsxv_ctp = {
+	.modes = &newhaven_nhd_10_1024600af_lsxv_ctp_mode,
+	.num_modes = 1,
+	.bpc = 8,
+	.size = {
+		.width = 224,
+		.height = 127,
+	},
+	.bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_SPWG,
+	.bus_flags = DRM_BUS_FLAG_DE_HIGH,
+	.connector_type = DRM_MODE_CONNECTOR_LVDS,
+};
+
 static const struct display_timing nlt_nl192108ac18_02d_timing = {
 	.pixelclock = { 130000000, 148350000, 163000000 },
 	.hactive = { 1920, 1920, 1920 },
@@ -4252,6 +4278,9 @@ static const struct of_device_id platform_of_match[] = {
 	}, {
 		.compatible = "newhaven,nhd-4.3-480272ef-atxl",
 		.data = &newhaven_nhd_43_480272ef_atxl,
+	}, {
+		.compatible = "newhaven,nhd-10.1-1024600af-lsxv-ctp",
+		.data = &newhaven_nhd_10_1024600af_lsxv_ctp,
 	}, {
 		.compatible = "nlt,nl192108ac18-02d",
 		.data = &nlt_nl192108ac18_02d,
