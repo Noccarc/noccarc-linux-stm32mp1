@@ -2956,7 +2956,7 @@ static const struct panel_desc newhaven_nhd_10_1024600af_lsxv_ctp = {
 		.width = 224,
 		.height = 127,
 	},
-	.bus_format = MEDIA_BUS_FMT_RGB888_1X24,
+	.bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_JEIDA,
 	.bus_flags = DRM_BUS_FLAG_DE_HIGH,
 	.connector_type = DRM_MODE_CONNECTOR_LVDS,
 };
