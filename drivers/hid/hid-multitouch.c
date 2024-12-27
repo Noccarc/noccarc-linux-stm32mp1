@@ -1102,7 +1102,14 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 			set_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
 			input_sync(input);
 		}
-		
+		else
+		{
+			input_mt_slot(input, slotnum); // Select slot
+    		input_mt_report_slot_state(input, tool, 0); // Mark inactive
+			clear_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
+			mt->flags &= ~(1<<INPUT_MT_DROP_UNUSED);
+			input_sync(input);
+		}
 		
 	}
 	else
