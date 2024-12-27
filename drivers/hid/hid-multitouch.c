@@ -1098,6 +1098,7 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 			input_event(input, EV_ABS, ABS_MT_PRESSURE, *slot->p);
 			input_event(input, EV_ABS, ABS_MT_TOUCH_MAJOR, major);
 			input_event(input, EV_ABS, ABS_MT_TOUCH_MINOR, minor);
+			input_sync(input);
 		}
 		set_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
 		
@@ -1107,6 +1108,7 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 		learn = 0;
 		input_mt_slot(input, slotnum); // Select slot
     	input_mt_report_slot_state(input, MT_TOOL_FINGER, 0); // Mark inactive
+		input_sync(input);
 	}
 
 	return 0;
