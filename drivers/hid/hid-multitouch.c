@@ -1098,9 +1098,9 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 			input_event(input, EV_ABS, ABS_MT_PRESSURE, *slot->p);
 			input_event(input, EV_ABS, ABS_MT_TOUCH_MAJOR, major);
 			input_event(input, EV_ABS, ABS_MT_TOUCH_MINOR, minor);
-
-			set_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
 		}
+		set_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
+		
 	}
 	else
 	{
