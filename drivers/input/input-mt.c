@@ -222,7 +222,7 @@ void input_mt_report_pointer_emulation(struct input_dev *dev, bool use_count)
 		count++;
 	}
 
-	if(count > 0)
+	if(count > 0 && count <= 2)
 	{
 		if(learn_1 == 0)
 		{
