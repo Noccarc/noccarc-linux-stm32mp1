@@ -1105,6 +1105,8 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 	else
 	{
 		learn = 0;
+		input_mt_slot(input, slotnum); // Select slot
+    	input_mt_report_slot_state(input, MT_TOOL_FINGER, 0); // Mark inactive
 	}
 
 	return 0;
