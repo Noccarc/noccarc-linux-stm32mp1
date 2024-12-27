@@ -968,6 +968,8 @@ static int mt_touch_event(struct hid_device *hid, struct hid_field *field,
 	return 1;
 }
 
+bool learn = 0;
+unsigned long start_time = 0;
 static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 			    struct mt_application *app,
 			    struct mt_usages *slot)
@@ -1079,17 +1081,30 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 			minor = minor >> 1;
 		}
 
-		input_event(input, EV_ABS, ABS_MT_POSITION_X, *slot->x);
-		input_event(input, EV_ABS, ABS_MT_POSITION_Y, *slot->y);
-		input_event(input, EV_ABS, ABS_MT_TOOL_X, *slot->cx);
-		input_event(input, EV_ABS, ABS_MT_TOOL_Y, *slot->cy);
-		input_event(input, EV_ABS, ABS_MT_DISTANCE, !*slot->tip_state);
-		input_event(input, EV_ABS, ABS_MT_ORIENTATION, orientation);
-		input_event(input, EV_ABS, ABS_MT_PRESSURE, *slot->p);
-		input_event(input, EV_ABS, ABS_MT_TOUCH_MAJOR, major);
-		input_event(input, EV_ABS, ABS_MT_TOUCH_MINOR, minor);
+		if(learn == 0)
+		{
+			start_time = jiffies;
+			learn = 1;
+		}
 
-		set_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
+		if(time_after(jiffies, start_time + msecs_to_jiffies(3)))
+		{
+			input_event(input, EV_ABS, ABS_MT_POSITION_X, *slot->x);
+			input_event(input, EV_ABS, ABS_MT_POSITION_Y, *slot->y);
+			input_event(input, EV_ABS, ABS_MT_TOOL_X, *slot->cx);
+			input_event(input, EV_ABS, ABS_MT_TOOL_Y, *slot->cy);
+			input_event(input, EV_ABS, ABS_MT_DISTANCE, !*slot->tip_state);
+			input_event(input, EV_ABS, ABS_MT_ORIENTATION, orientation);
+			input_event(input, EV_ABS, ABS_MT_PRESSURE, *slot->p);
+			input_event(input, EV_ABS, ABS_MT_TOUCH_MAJOR, major);
+			input_event(input, EV_ABS, ABS_MT_TOUCH_MINOR, minor);
+
+			set_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
+		}
+	}
+	else
+	{
+		learn = 0;
 	}
 
 	return 0;
