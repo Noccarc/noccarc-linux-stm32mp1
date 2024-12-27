@@ -192,6 +192,10 @@ EXPORT_SYMBOL(input_mt_report_finger_count);
  * The input core ensures only the KEY and ABS axes already setup for
  * this device will produce output.
  */
+
+bool learn_1 = 0;
+unsigned long start_time_1 = 0;
+
 void input_mt_report_pointer_emulation(struct input_dev *dev, bool use_count)
 {
 	struct input_mt *mt = dev->mt;
@@ -218,7 +222,19 @@ void input_mt_report_pointer_emulation(struct input_dev *dev, bool use_count)
 		count++;
 	}
 
-	input_event(dev, EV_KEY, BTN_TOUCH, count > 0);
+	if(count > 0)
+	{
+		if(learn_1 == 0)
+		{
+			start_time_1 = jiffies;
+			learn_1 = 1;
+		}
+
+		if(time_after(jiffies, start_time_1 + msecs_to_jiffies(3)))
+		{
+			input_event(dev, EV_KEY, BTN_TOUCH, count > 0);
+		}
+	
 
 	if (use_count) {
 		if (count == 0 &&
@@ -251,6 +267,11 @@ void input_mt_report_pointer_emulation(struct input_dev *dev, bool use_count)
 	} else {
 		if (test_bit(ABS_MT_PRESSURE, dev->absbit))
 			input_event(dev, EV_ABS, ABS_PRESSURE, 0);
+	}
+	}
+	else
+	{
+		learn_1 = 0;
 	}
 }
 EXPORT_SYMBOL(input_mt_report_pointer_emulation);
