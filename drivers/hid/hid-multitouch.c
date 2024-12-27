@@ -1042,8 +1042,7 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 		}
 	}
 
-	input_mt_slot(input, slotnum);
-	input_mt_report_slot_state(input, tool, active);
+
 	if (active) {
 		/* this finger is in proximity of the sensor */
 		int wide = (*slot->w > *slot->h);
@@ -1089,6 +1088,8 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 
 		if(time_after(jiffies, start_time + msecs_to_jiffies(3)))
 		{
+			input_mt_slot(input, slotnum);
+			input_mt_report_slot_state(input, tool, active);
 			input_event(input, EV_ABS, ABS_MT_POSITION_X, *slot->x);
 			input_event(input, EV_ABS, ABS_MT_POSITION_Y, *slot->y);
 			input_event(input, EV_ABS, ABS_MT_TOOL_X, *slot->cx);
@@ -1098,16 +1099,18 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 			input_event(input, EV_ABS, ABS_MT_PRESSURE, *slot->p);
 			input_event(input, EV_ABS, ABS_MT_TOUCH_MAJOR, major);
 			input_event(input, EV_ABS, ABS_MT_TOUCH_MINOR, minor);
+			set_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
 			input_sync(input);
 		}
-		set_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
+		
 		
 	}
 	else
 	{
 		learn = 0;
 		input_mt_slot(input, slotnum); // Select slot
-    	input_mt_report_slot_state(input, MT_TOOL_FINGER, 0); // Mark inactive
+    	input_mt_report_slot_state(input, tool, 0); // Mark inactive
+		clear_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
 		input_sync(input);
 	}
 
