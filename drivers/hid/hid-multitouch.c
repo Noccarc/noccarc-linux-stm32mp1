@@ -1093,7 +1093,7 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 			learn = 1;
 		}
 
-		if(time_after(jiffies, start_time + msecs_to_jiffies(50)))
+		if(time_after(jiffies, start_time + msecs_to_jiffies(25)))
 		{
 			input_mt_slot(input, slotnum);
 			input_mt_report_slot_state(input, tool, active);
