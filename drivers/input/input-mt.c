@@ -272,7 +272,14 @@ void input_mt_report_pointer_emulation(struct input_dev *dev, bool use_count)
 	else
 	{
 		learn_1 = 0;
-		input_event(dev, EV_KEY, BTN_TOUCH, count > 0);
+		if(count > 2)
+		{
+			input_event(dev, EV_KEY, BTN_TOUCH, 2 );
+		}
+		else
+		{
+			input_event(dev, EV_KEY, BTN_TOUCH, count > 0);
+		}
 	}
 }
 EXPORT_SYMBOL(input_mt_report_pointer_emulation);

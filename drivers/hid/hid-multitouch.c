@@ -976,6 +976,8 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 {
 	struct input_mt *mt = input->mt;
 	__s32 quirks = app->quirks;
+	quirks |= MT_QUIRK_CONFIDENCE;
+
 	bool valid = true;
 	bool confidence_state = true;
 	bool inrange_state = false;
@@ -1004,6 +1006,7 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 	}
 
 	slotnum = mt_compute_slot(td, app, slot, input);
+	printk(KERN_INFO "slot number %d" , slotnum);
 	if (slotnum < 0 || slotnum >= td->maxcontacts)
 		return 0;
 
@@ -1017,12 +1020,14 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 
 	if (quirks & MT_QUIRK_CONFIDENCE)
 		confidence_state = *slot->confidence_state;
+		printk(KERN_INFO "confidence_state %d",confidence_state);
 
 	if (quirks & MT_QUIRK_HOVERING)
 		inrange_state = *slot->inrange_state;
+		printk(KERN_INFO "inrange_state %d",inrange_state);
 
-	active = *slot->tip_state || inrange_state;
-
+	active = *slot->tip_state | inrange_state ;
+	printk(KERN_INFO "active state %d",active);
 	if (app->application == HID_GD_SYSTEM_MULTIAXIS)
 		tool = MT_TOOL_DIAL;
 	else if (unlikely(!confidence_state)) {
@@ -1087,7 +1092,7 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 			learn = 1;
 		}
 
-		if(time_after(jiffies, start_time + msecs_to_jiffies(3)))
+		if(time_after(jiffies, start_time + msecs_to_jiffies(100)))
 		{
 			input_mt_slot(input, slotnum);
 			input_mt_report_slot_state(input, tool, active);
