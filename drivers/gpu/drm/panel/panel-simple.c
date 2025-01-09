@@ -686,6 +686,11 @@ static const struct panel_desc tianma_nlb150xg01l_01 = {
                 .width = 304,
                 .height = 228,
         },
+		.delay = {
+		.prepare = 210,
+		.enable = 50,
+		.unprepare = 160,
+	},
         .bus_flags = DRM_BUS_FLAG_DE_HIGH,
         .bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_SPWG,
         .connector_type = DRM_MODE_CONNECTOR_LVDS,
