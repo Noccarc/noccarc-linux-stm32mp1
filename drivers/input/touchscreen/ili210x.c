@@ -11,7 +11,7 @@
 #include <linux/sizes.h>
 #include <linux/slab.h>
 #include <asm/unaligned.h>
-
+#include <linux/i2c.h>
 #define ILI2XXX_POLL_PERIOD	20
 
 #define ILI210X_DATA_SIZE	64
@@ -395,6 +395,7 @@ static void ili210x_stop(void *data)
 static int ili210x_i2c_probe(struct i2c_client *client,
 			     const struct i2c_device_id *id)
 {
+	
 	struct device *dev = &client->dev;
 	const struct ili2xxx_chip *chip;
 	struct ili210x *priv;
@@ -405,10 +406,20 @@ static int ili210x_i2c_probe(struct i2c_client *client,
 	dev_dbg(dev, "Probing for ILI210X I2C Touschreen driver");
 
 	chip = device_get_match_data(dev);
+	
+
 	if (!chip && id)
 		chip = (const struct ili2xxx_chip *)id->driver_data;
+		
 	if (!chip) {
-		dev_err(&client->dev, "unknown device model\n");
+		dev_err(dev, "unknown device model\n");
+		return -ENODEV;
+	}
+
+	/* Check if the device responds to I2C */
+	u8 dummy;
+	if (ili210x_read_reg(client, REG_PANEL_INFO, &dummy, 1)) {
+		dev_err(dev, "No response from ILI210X device on I2C\n");
 		return -ENODEV;
 	}
 
