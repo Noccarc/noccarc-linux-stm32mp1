@@ -968,12 +968,16 @@ static int mt_touch_event(struct hid_device *hid, struct hid_field *field,
 	return 1;
 }
 
+bool learn = 0;
+unsigned long start_time = 0;
 static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 			    struct mt_application *app,
 			    struct mt_usages *slot)
 {
 	struct input_mt *mt = input->mt;
 	__s32 quirks = app->quirks;
+	quirks |= MT_QUIRK_CONFIDENCE;
+
 	bool valid = true;
 	bool confidence_state = true;
 	bool inrange_state = false;
@@ -981,6 +985,7 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 	int slotnum;
 	int tool = MT_TOOL_FINGER;
 
+	td->maxcontacts = 2;
 	if (!slot)
 		return -EINVAL;
 
@@ -1001,6 +1006,7 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 	}
 
 	slotnum = mt_compute_slot(td, app, slot, input);
+	// printk(KERN_INFO "slot number %d" , slotnum);
 	if (slotnum < 0 || slotnum >= td->maxcontacts)
 		return 0;
 
@@ -1014,11 +1020,14 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 
 	if (quirks & MT_QUIRK_CONFIDENCE)
 		confidence_state = *slot->confidence_state;
+		// printk(KERN_INFO "confidence_state %d",confidence_state);
 
 	if (quirks & MT_QUIRK_HOVERING)
 		inrange_state = *slot->inrange_state;
+		// printk(KERN_INFO "inrange_state %d",inrange_state);
 
-	active = *slot->tip_state || inrange_state;
+	active = *slot->tip_state | inrange_state ;
+	// printk(KERN_INFO "active state %d",active);
 
 	if (app->application == HID_GD_SYSTEM_MULTIAXIS)
 		tool = MT_TOOL_DIAL;
@@ -1040,8 +1049,7 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 		}
 	}
 
-	input_mt_slot(input, slotnum);
-	input_mt_report_slot_state(input, tool, active);
+
 	if (active) {
 		/* this finger is in proximity of the sensor */
 		int wide = (*slot->w > *slot->h);
@@ -1079,17 +1087,45 @@ static int mt_process_slot(struct mt_device *td, struct input_dev *input,
 			minor = minor >> 1;
 		}
 
-		input_event(input, EV_ABS, ABS_MT_POSITION_X, *slot->x);
-		input_event(input, EV_ABS, ABS_MT_POSITION_Y, *slot->y);
-		input_event(input, EV_ABS, ABS_MT_TOOL_X, *slot->cx);
-		input_event(input, EV_ABS, ABS_MT_TOOL_Y, *slot->cy);
-		input_event(input, EV_ABS, ABS_MT_DISTANCE, !*slot->tip_state);
-		input_event(input, EV_ABS, ABS_MT_ORIENTATION, orientation);
-		input_event(input, EV_ABS, ABS_MT_PRESSURE, *slot->p);
-		input_event(input, EV_ABS, ABS_MT_TOUCH_MAJOR, major);
-		input_event(input, EV_ABS, ABS_MT_TOUCH_MINOR, minor);
+		if(learn == 0)
+		{
+			start_time = jiffies;
+			learn = 1;
+		}
 
-		set_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
+		if(time_after(jiffies, start_time + msecs_to_jiffies(25)))
+		{
+			input_mt_slot(input, slotnum);
+			input_mt_report_slot_state(input, tool, active);
+			input_event(input, EV_ABS, ABS_MT_POSITION_X, *slot->x);
+			input_event(input, EV_ABS, ABS_MT_POSITION_Y, *slot->y);
+			input_event(input, EV_ABS, ABS_MT_TOOL_X, *slot->cx);
+			input_event(input, EV_ABS, ABS_MT_TOOL_Y, *slot->cy);
+			input_event(input, EV_ABS, ABS_MT_DISTANCE, !*slot->tip_state);
+			input_event(input, EV_ABS, ABS_MT_ORIENTATION, orientation);
+			input_event(input, EV_ABS, ABS_MT_PRESSURE, *slot->p);
+			input_event(input, EV_ABS, ABS_MT_TOUCH_MAJOR, major);
+			input_event(input, EV_ABS, ABS_MT_TOUCH_MINOR, minor);
+			set_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
+			input_sync(input);
+		}
+		// else
+		// {
+		// 	input_mt_slot(input, slotnum); // Select slot
+    	// 	input_mt_report_slot_state(input, tool, 0); // Mark inactive
+		// 	clear_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
+		// 	mt->flags &= ~(1<<INPUT_MT_DROP_UNUSED);
+		// 	input_sync(input);
+		// }
+		
+	}
+	else
+	{
+		learn = 0;
+		input_mt_slot(input, slotnum); // Select slot
+    	input_mt_report_slot_state(input, tool, 0); // Mark inactive
+		clear_bit(MT_IO_FLAGS_ACTIVE_SLOTS, &td->mt_io_flags);
+		input_sync(input);
 	}
 
 	return 0;
