@@ -127,6 +127,7 @@ enum sn65dsi83_ports {
 	SN65DSI83_LVDS_OUT1,
 };
 
+
 struct ti_data {
 	struct i2c_client	*i2c;
 	struct device		*dev;
